@@ -221,5 +221,3 @@
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
 #
 59 23 * * * python3 /jd/scripts/jd_blueCoin.py >> /jd/log/jd_blueCoin.log 2>&1
-# 点点券
-6 0,5,9,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
