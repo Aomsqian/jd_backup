@@ -11,13 +11,13 @@
 
 ================Loon==============
 [Script]
-cron "10 12 * * *" script-path=jd_crazy_joy_bonus.js,tag=监控crazyJoy分红
+#cron "10 12 * * *" script-path=jd_crazy_joy_bonus.js,tag=监控crazyJoy分红
 
 ===============Surge=================
-监控crazyJoy分红 = type=cron,cronexp="10 12 * * *",wake-system=1,timeout=3600,script-path=jd_crazy_joy_bonus.js
+#监控crazyJoy分红 = type=cron,cronexp="10 12 * * *",wake-system=1,timeout=3600,script-path=jd_crazy_joy_bonus.js
 
 ============小火箭=========
-监控crazyJoy分红 = type=cron,script-path=jd_crazy_joy_bonus.js, cronexpr="10 12 * * *", timeout=3600, enable=true
+#监控crazyJoy分红 = type=cron,script-path=jd_crazy_joy_bonus.js, cronexpr="10 12 * * *", timeout=3600, enable=true
 
  */
 const $ = new Env('监控crazyJoy分红');
