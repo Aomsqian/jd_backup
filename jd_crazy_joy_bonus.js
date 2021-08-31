@@ -7,7 +7,7 @@
 ============Quantumultx===============
 [task_local]
 #监控crazyJoy分红
-10 12 * * * jd_crazy_joy_bonus.js, tag=监控crazyJoy分红, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
+#10 12 * * * jd_crazy_joy_bonus.js, tag=监控crazyJoy分红, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
 
 ================Loon==============
 [Script]
