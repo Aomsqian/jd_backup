@@ -9,7 +9,7 @@ crazyJoy任务
 ============Quantumultx===============
 [task_local]
 #crazyJoy任务
-10 9 * * * jd_crazy_joy.js, tag=crazyJoy任务, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
+#10 9 * * * jd_crazy_joy.js, tag=crazyJoy任务, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
 
 ================Loon==============
 [Script]
