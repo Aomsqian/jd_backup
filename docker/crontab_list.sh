@@ -203,3 +203,5 @@
 59 23 * * * python3 /jd/scripts/jd_blueCoin.py >> /jd/log/jd_blueCoin.log 2>&1
 #开卡19
 0 6 * * * node /scripts/jd_opencard19.js >> /scripts/logs/jd_opencard19.log 2>&1
+#开卡20
+30 8,2 1-21 9 * node /scripts/jd_opencard20.js >> /scripts/logs/jd_opencard20.log 2>&1
