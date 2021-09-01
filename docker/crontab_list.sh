@@ -193,8 +193,6 @@
 5 0 * * * node /scripts/jd_ccSign.js >> /scripts/logs/jd_ccSign.log 2>&1
 #
 20 3,6,9 * * * node /scripts/jd_dreamfactory_tuan.js >> /scripts/logs/jd_dreamfactory_tuan.log 2>&1
-#开学充电站
-10 4,11 * * * node /scripts/jd_kxcdz.js >> /scripts/logs/jd_kxcdz.log 2>&1
 #京东工业品抽奖
 10 6 17,18 8 * node /scripts/jd_industryLottery.js >> /scripts/logs/jd_industryLottery.log 2>&1
 #京喜领红包
