@@ -20,14 +20,11 @@ cron "20 8 * * *" script-path=jd_sgmh.js, tag=闪购盲盒
 闪购盲盒 = type=cron,script-path=jd_sgmh.js, cronexpr="20 8 * * *", timeout=3600, enable=true
  */
 const $ = new Env('闪购盲盒');
-
-console.log('\n====================Hello World====================\n')
-
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let appId = '1EFRXxg' , homeDataFunPrefix = 'interact_template', collectScoreFunPrefix = 'harmony', message = ''
 let lotteryResultFunPrefix = homeDataFunPrefix, browseTime = 6
-const inviteCodes = [''];
+const inviteCodes = [];
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}
@@ -308,13 +305,16 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: ``,
-      'timeout': 10000
+      url: `https://cdn.nz.lu/api/sgmh/${randomCount}`,
+      headers: {
+        'Host':'api.sharecode.ga'
+      },
+      timeout: 10000
     }, (err, resp, data) => {
       try {
         if (err) {
-          //console.log(`${JSON.stringify(err)}`)
-          //console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
