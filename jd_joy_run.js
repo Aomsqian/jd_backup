@@ -14,23 +14,23 @@ docker 设置环境变量 JOY_RUN_HELP_MYSELF 为true,则开启账号内部互�
 hostname = draw.jdfcloud.com
 ===========Surge=================
 [Script]
-宠汪汪邀请助力与赛跑助力 = type=cron,cronexp="15 10 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js
-宠汪汪助力更新Token = type=http-response,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code=, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js
-宠汪汪助力获取Token = type=http-request,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId=, max-size=0, script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js
+宠汪汪邀请助力与赛跑助力 = type=cron,cronexp="15 10 * * *",wake-system=1,timeout=3600,script-path=jd_joy_run.js
+宠汪汪助力更新Token = type=http-response,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code=, requires-body=1, max-size=0, script-path=jd_joy_run.js
+宠汪汪助力获取Token = type=http-request,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId=, max-size=0, script-path=jd_joy_run.js
 ===================Quantumult X=====================
 [task_local]
 # 宠汪汪邀请助力与赛跑助力
-15 10 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js, tag=宠汪汪邀请助力与赛跑助力, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+15 10 * * * jd_joy_run.js, tag=宠汪汪邀请助力与赛跑助力, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
 [rewrite_local]
 # 宠汪汪助力更新Token
-^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code= url script-response-body https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js
+^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code= url script-response-body jd_joy_run.js
 # 宠汪汪助力获取Token
-^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= url script-request-header https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js
+^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= url script-request-header jd_joy_run.js
 =====================Loon=====================
 [Script]
-cron "15 10 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js, tag=宠汪汪邀请助力与赛跑助力
-http-response ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code= script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js, requires-body=true, timeout=10, tag=宠汪汪助力更新Token
-http-request ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js, timeout=3600, tag=宠汪汪助力获取Token
+cron "15 10 * * *" script-path=jd_joy_run.js, tag=宠汪汪邀请助力与赛跑助力
+http-response ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code= script-path=jd_joy_run.js, requires-body=true, timeout=10, tag=宠汪汪助力更新Token
+http-request ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= script-path=jd_joy_run.js, timeout=3600, tag=宠汪汪助力获取Token
 */
 const $ = new Env('宠汪汪赛跑');
 const zooFaker = require('./utils/JDJRValidator_Pure');
@@ -45,11 +45,12 @@ const JD_BASE_API = `https://draw.jdfcloud.com//pet`;
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
 //下面给出好友邀请助力的示例填写规则
-let invite_pins = [];
+//下面给出好友邀请助力的示例填写规则
+let invite_pins = ['5141779-21548625,jd_nlGJfCMVydhw'];
 //下面给出好友赛跑助力的示例填写规则
-let run_pins = [];
+let run_pins = ['5141779-21548625,jd_nlGJfCMVydhw'];
 //friendsArr内置太多会导致IOS端部分软件重启,可PR过来(此处目的:帮别人助力可得30g狗粮)
-let friendsArr = []
+let friendsArr = ["5141779-21548625","jd_nlGJfCMVydhw"]
 
 
 //IOS等用户直接用NobyDa的jd cookie
@@ -109,12 +110,13 @@ async function main() {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  const readTokenRes = await readToken();
+  const readTokenRes = ''
   if (readTokenRes && readTokenRes.code === 200) {
     $.LKYLToken = readTokenRes.data[0] || ($.isNode() ? (process.env.JOY_RUN_TOKEN ? process.env.JOY_RUN_TOKEN : jdJoyRunToken) : ($.getdata('jdJoyRunToken') || jdJoyRunToken));
   } else {
     $.LKYLToken = $.isNode() ? (process.env.JOY_RUN_TOKEN ? process.env.JOY_RUN_TOKEN : jdJoyRunToken) : ($.getdata('jdJoyRunToken') || jdJoyRunToken);
   }
+  await readToken();
   console.log(`打印token：${$.LKYLToken ? $.LKYLToken : '暂无token'}\n`)
   if (!$.LKYLToken) {
     $.msg($.name, '【提示】请先获取来客有礼宠汪汪token', "iOS用户微信搜索'来客有礼'小程序\n点击底部的'发现'Tab\n即可获取Token");
@@ -124,8 +126,6 @@ async function main() {
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       $.validate = '';
-      // const zooFaker = require('./utils/JDJRValidator_Pure');
-      // $.validate = await zooFaker.injectToRequest()
       if ($.isNode()) {
         if (process.env.JOY_RUN_HELP_MYSELF) {
           console.log(`\n赛跑会先给账号内部助力,如您当前账户有剩下助力机会则为lx0301作者助力\n`)
@@ -139,8 +139,8 @@ async function main() {
           run_pins = run_pins[0].split(',')
           Object.values(jdCookieNode).filter(item => item.match(/pt_pin=([^; ]+)(?=;?)/)).map(item => run_pins.push(decodeURIComponent(item.match(/pt_pin=([^; ]+)(?=;?)/)[1])))
           run_pins = [...new Set(run_pins)];
-          let fixPins = run_pins.splice(run_pins.indexOf('zhaosen2580'), 1);
-          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_61f1269fd3236'), 1));
+          let fixPins = run_pins.splice(run_pins.indexOf('5141779-21548625'), 1);
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_nlGJfCMVydhw'), 1));
           const randomPins = getRandomArrayElements(run_pins, run_pins.length);
           run_pins = [[...fixPins, ...randomPins].join(',')];
           invite_pins = run_pins;
@@ -174,93 +174,19 @@ async function main() {
   }
   $.done()
 }
-//获取来客有礼Token
-let count = 0;
-async function getToken() {
-  const url = $request.url;
-  $.log(`${$.name}url\n${url}\n`)
-  if (isURL(url, /^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code=/)) {
-    const body = JSON.parse($response.body);
-    const LKYLToken = body.data && body.data.token;
-    if (LKYLToken) {
-      $.log(`${$.name} token\n${LKYLToken}\n`);
-      $.msg($.name, '更新Token: 成功🎉', ``);
-      console.log(`\nToken，${LKYLToken}\n`)
-      $.http.post({
-        url: `http://share.turinglabs.net/api/v3/create/sharecode/`,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          "activity_name": "joy",
-          "share_code": LKYLToken,
-        }),
-        timeout: 30000
-      }).then((resp) => {
-        if (resp.statusCode === 200) {
-          try {
-            let { body } = resp;
-            console.log(`Token提交结果:${body}\n`)
-            body = JSON.parse(body);
-            console.log(`${body.message}`)
-          } catch (e) {
-            console.log(`提交Token异常:${e}`)
-          }
-        }
-      }).catch((e) => console.log(`catch 宠汪汪TOKEN提交异常:${e}`));
-      // count = $.getdata('countFlag') ? $.getdata('countFlag') * 1 : 0;
-      // count ++;
-      // console.log(`count: ${count}`)
-      // $.setdata(`${count}`, 'countFlag');
-      // if ($.getdata('countFlag') * 1 === 2) {
-      //   count = 0;
-      //   $.setdata(`${count}`, 'countFlag');
-      //   $.msg($.name, '更新Token: 成功🎉', ``);
-      //   console.log(`开始上传Token，${LKYLToken}\n`)
-      //   await $.http.get({url: `http://jd.turinglabs.net/api/v2/jd/joy/create/${LKYLToken}/`}).then((resp) => {
-      //     if (resp.statusCode === 200) {
-      //       let { body } = resp;
-      //       console.log(`Token提交结果:${body}\n`)
-      //       body = JSON.parse(body);
-      //       console.log(`${body.message}`)
-      //     }
-      //   });
-      // }
-      $.setdata(LKYLToken, 'jdJoyRunToken');
-    }
-    $.done({ body: JSON.stringify(body) })
-  } else if (isURL(url, /^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId=/)){
-    if ($request && $request.method !== 'OPTIONS') {
-      const LKYLToken = $request.headers['LKYLToken'];
-      //if ($.getdata('jdJoyRunToken')) {
-      //if ($.getdata('jdJoyRunToken') !== LKYLToken) {
-
-      //}
-      //$.msg($.name, '更新获取Token: 成功🎉', `\n${LKYLToken}\n`);
-      //} else {
-      //$.msg($.name, '获取Token: 成功🎉', `\n${LKYLToken}\n`);
-      //}
-      $.setdata(LKYLToken, 'jdJoyRunToken');
-
-      $.msg($.name, '获取Token: 成功🎉', ``);
-
-      // $.done({ body: JSON.stringify(body) })
-      $.done({ url: url })
-    }
-  } else {
-    $.done()
-  }
-}
 function readToken() {
   return new Promise(resolve => {
-    $.get({url: `https://cdn.nz.lu/gettoken`,headers:{'Host':'jdsign.cf'}, timeout: 15000}, (err, resp, data) => {
+    $.get({url: `https://action-1251995682.file.myqcloud.com/shareCodes/jd_joyToken.json`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            // if ($.isNode() && !run_pins[0].includes("被折叠的记忆33")) resolve(null);
-            console.log(`\n\n搬运我脚本修改我内置互助码的，请不要盗取我服务器token\n\n\n`)
             data = JSON.parse(data);
+            if(data && data.length > 0){
+              $.LKYLToken = data[0]['code'];
+            }
           }
         }
       } catch (e) {
