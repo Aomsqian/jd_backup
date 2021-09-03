@@ -27,7 +27,7 @@ let lotteryResultFunPrefix = homeDataFunPrefix, browseTime = 6
 const inviteCodes = [
   ''
 ];
-const randomCount = $.isNode() ? 20 : 5;
+const randomCount = $.isNode() ? 0 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}
 //IOS等用户直接用NobyDa的jd cookie
@@ -307,19 +307,16 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `https://cdn.nz.lu/api/sgmh/${randomCount}`,
-      headers: {
-        'Host':'api.sharecode.ga'
-      },
-      timeout: 10000
+      url: `/`,
+      'timeout': 10000
     }, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+      //  console.log(`${JSON.stringify(err)}`)
+      //  console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+     //   console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
