@@ -30,16 +30,16 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  
+  '',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  
+  '',
 ]
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
 let lastRoundId = null;//上期id
 let roundList = [];
 let awardState = '';//上期活动的京豆是否收取
-let randomCount = $.isNode() ? 20 : 5;
+let randomCount = $.isNode() ? 0 : 5;
 let num;
 !(async () => {
   await requireConfig();
@@ -100,26 +100,6 @@ async function jdPlantBean() {
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl
       $.myPlantUuid = getParam(shareUrl, 'plantUuid')
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
-
-      // ***************************
-      // 报告运行次数
-      $.get({
-        url: `https://cdn.nz.lu/api/runTimes?activityId=bean&sharecode=${$.myPlantUuid}`,
-        headers: {
-          'Host': 'api.sharecode.ga'
-        },
-        timeout: 10000
-      }, (err, resp, data) => {
-        if (err) {
-          console.log('上报失败', err)
-        } else {
-          if (data === '1' || data === '0') {
-            console.log('上报成功')
-          }
-        }
-      })
-      // ***************************
-
       roundList = $.plantBeanIndexResult.data.roundList;
       currentRoundId = roundList[num].roundId;//本期的roundId
       lastRoundId = roundList[num - 1].roundId;//上期的roundId
@@ -131,7 +111,7 @@ async function jdPlantBean() {
       await receiveNutrients();//定时领取营养液
       await doHelp();//助力
       await doTask();//做日常任务
-      // await doEgg();
+    //await doEgg();//注释结束任务
       await stealFriendWater();
       await doCultureBean();
       await doGetReward();
@@ -557,14 +537,14 @@ async function plantBeanIndex() {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://cdn.nz.lu/api/bean/${randomCount}`, headers:{'Host':'api.sharecode.ga'}, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `/`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+     //   console.log(`${JSON.stringify(err)}`)
+     //   console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
+     //     console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
@@ -586,14 +566,14 @@ function shareCodesFormat() {
     if ($.shareCodesArr[$.index - 1]) {
       newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
+  //  console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
       newShareCodes = shareCodes[tempIndex].split('@');
     }
-    const readShareCodeRes = await readShareCode();
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+    // const readShareCodeRes = await readShareCode();
+    // if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //   newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    // }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })
