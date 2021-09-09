@@ -203,3 +203,5 @@
 10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
 #心相印
 12 9,15 1-30 9,10 * node /scripts/jd_xinxiangyin.js >> /scripts/logs/jd_xinxiangyin.log 2>&1
+# 电脑配件
+17 4 * 9 * node /scripts/jd_unknownTask1.js >> /scripts/logs/jd_unknownTask1.log 2>&1
