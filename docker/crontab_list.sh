@@ -205,3 +205,5 @@
 12 9,15 1-30 9,10 * node /scripts/jd_xinxiangyin.js >> /scripts/logs/jd_xinxiangyin.log 2>&1
 # 电脑配件
 17 4 * 9 * node /scripts/jd_unknownTask1.js >> /scripts/logs/jd_unknownTask1.log 2>&1
+# 明星小店
+10 9,18 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
