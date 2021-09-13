@@ -59,8 +59,8 @@
 45 6-18/6 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
 #
 1 2 * * * node /scripts/jd_redPacket.js >> /scripts/logs/jd_redPacket.log 2>&1
-#
-#1 3,9,18 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
+#跳一跳
+1 3,9,18 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 #
 36 0,1-23/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 #
@@ -210,3 +210,5 @@
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 京喜财富岛月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
+#希捷品牌日瓜分百万京豆
+17 2,10 * 9,10 * node /scripts/jd_UnknownTask4.js >> /scripts/logs/jd_UnknownTask4.log 2>&1
