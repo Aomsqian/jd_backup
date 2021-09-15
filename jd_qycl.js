@@ -1,17 +1,17 @@
 /*
- tgchannel：https://t.me/Ariszy8028
+tgchannel：https://t.me/Ariszy8028
 github：https://github.com/Ariszy/Private-Script
 boxjs：https://raw.githubusercontent.com/Ariszy/Private-Script/master/Ariszy.boxjs.json
 [task_local]
 #企有此礼
-30 0 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, tag= 企有此礼
+30 0,20 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, tag= 企有此礼
 ================Loon==============
 [Script]
-cron "30 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js,tag= 企有此礼
+cron "30 0,20 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js,tag= 企有此礼
 ===============Surge=================
-企有此礼 = type=cron,cronexp="30 0 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js
+企有此礼 = type=cron,cronexp="30 0,20 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js
 ============小火箭=========
-企有此礼 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, cronexpr="30 0 * * *", timeout=3600, enable=true
+企有此礼 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, cronexpr="30 0,20 * * *", timeout=3600, enable=true
 */
 const $ = new Env('企有此礼')
 const notify = $.isNode() ?require('./sendNotify') : '';
@@ -69,7 +69,10 @@ if ($.isNode()) {
             }
             continue
         }
-
+        await gethelpcode()
+        await getlist()
+        await Ariszy()
+        await zy()
     }
     for(let i = 0; i < cookiesArr.length; i++){
         cookie = cookiesArr[i];
@@ -79,6 +82,8 @@ if ($.isNode()) {
         $.index = i + 1;
         console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}助力模块*********\n`);
 
+        await control()
+        await Lottery()
         await userScore()
     }
 
@@ -112,7 +117,7 @@ async function doTask(){
                 if(logs)$.log(data)
                 if(result.code == 0){
                     console.log("\n"+result.data.bizMsg+"\n")
-                    await $.wait(8000)
+                    await $.wait(10000)
                 }else{
                     $.log(result.data.bizMsg+"\n")
                 }
