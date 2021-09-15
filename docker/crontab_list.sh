@@ -215,3 +215,5 @@
 23 10,21 13-26 9 * node /scripts/jd_film_museum.js >> /scripts/logs/jd_film_museum.log 2>&1
 # 企有此礼
 30 0 * * * node /scripts/jd_qycl.js >> /scripts/logs/jd_qycl.log 2>&1
+#开卡32
+#18 5,20 15-23 9 * node /scripts/jd_opencard32.js >> /scripts/logs/jd_opencard32.log 2>&1
