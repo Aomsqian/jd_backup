@@ -219,3 +219,5 @@
 15 3,16 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
 # 京东手机狂欢城
 0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+# 热血心跳,狂解压
+5 6,18 * * * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
