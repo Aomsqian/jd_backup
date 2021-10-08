@@ -219,8 +219,8 @@
 5 6,18 * * * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
 # 东东玩家
 20 0,16 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
-# 集魔方 (京东APP - 新品 - 集魔方)
-16 5,13 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mofang.log 2>&1
+# 魔方
+11 7,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 芥么签到
 11 0,9 * * * node /scripts/jd_jmsign.js >> /scripts/logs/jd_jmsign.log 2>&1
 # 芥么赚豪礼
