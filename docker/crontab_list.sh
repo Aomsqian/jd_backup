@@ -204,8 +204,7 @@
 10 9,18 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
 # 内容鉴赏官
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-# 京喜财富岛月饼
-5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
+
 #希捷品牌日瓜分百万京豆
 17 2,10 * 9,10 * node /scripts/jd_UnknownTask4.js >> /scripts/logs/jd_UnknownTask4.log 2>&1
 
