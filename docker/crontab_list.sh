@@ -217,8 +217,6 @@
 
 # 热血心跳,狂解压
 5 6,18 * * * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
-# 东东玩家
-20 0,16 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
 # 魔方
 11 7,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 芥么签到
@@ -229,4 +227,7 @@
 45 2,22 * * * node /scripts/jd_opencard39.js >> /scripts/logs/jd_opencard39.log 2>&1
 #开卡40
 22 1,18 8-14 * * node /scripts/jd_opencard40.js >> /scripts/logs/jd_opencard40.log 2>&1
-
+# 东东世界兑换
+0 0 * * * node /scripts/jd_ddworld_exchange.js >> /scripts/logs/jd_ddworld_exchange.log 2>&1
+# 1+9
+4 4,17 * * * node /scripts/jd_yijiajiu.js >> /scripts/logs/jd_yijiajiu.log 2>&1
