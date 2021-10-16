@@ -231,5 +231,5 @@
 27 5,18 * * * node /scripts/jd_haier.js >> /scripts/logs/jd_haier.log 2>&1
 # 幸运扭蛋
 24 9 * 10-11 * node /scripts/jd_lucky_egg.js >> /scripts/logs/jd_lucky_egg.log 2>&1
-# 京东工业品
+# 
 13 4,15 * * * node /scripts/jd_industrial_task.js >> /scripts/logs/jd_industrial_task.log 2>&1
