@@ -235,3 +235,5 @@
 13 4,15 * * * node /scripts/jd_industrial_task.js >> /scripts/logs/jd_industrial_task.log 2>&1
 # 攒金币 赢大礼
 22 0,8 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
+#领京豆额外奖励
+10 3,9 * * * node /scripts/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
