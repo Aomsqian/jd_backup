@@ -3,17 +3,21 @@
 cron 5 * * * * jd_cfd_mooncake.js
 更新时间：2021-9-11
 活动入口：京喜APP-我的-京喜财富岛
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛合成月饼
 5 * * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_mooncake.js, tag=京喜财富岛合成月饼, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "5 * * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_mooncake.js,tag=京喜财富岛合成月饼
+
 ===============Surge=================
 京喜财富岛合成月饼 = type=cron,cronexp="5 * * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_mooncake.js
+
 ============小火箭=========
 京喜财富岛合成月饼 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_mooncake.js, cronexpr="5 * * * *", timeout=3600, enable=true
  */
@@ -33,7 +37,7 @@ $.notifyTime = $.getdata("cfd_notifyTime");
 $.result = [];
 $.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
-let UA, UAInfo = {}, num
+let UA, UAInfo = {};
 let nowTimes;
 const randomCount = $.isNode() ? 20 : 3;
 if ($.isNode()) {
@@ -93,7 +97,6 @@ $.appId = 10028;
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
         $.canHelp = true
         UA = UAInfo[$.UserName]
-        num = 0
         if ($.newShareCodes && $.newShareCodes.length) {
             console.log(`\n开始互助\n`);
             for (let j = 0; j < $.newShareCodes.length && $.canHelp; j++) {
@@ -107,6 +110,8 @@ $.appId = 10028;
                     continue
                 }
             }
+        } else {
+            break
         }
     }
     await showMsg();
@@ -198,7 +203,7 @@ async function composePearlState(type) {
                                     let beacon = data.PearlList[0]
                                     data.PearlList.shift()
                                     let beaconType = beacon.type
-                                    let num = Math.ceil(Math.random() * 12 + 8)
+                                    let num = Math.ceil(Math.random() * 12 + 12)
                                     console.log(`合成月饼：模拟操作${num}次`)
                                     for (let v = 0; v < num; v++) {
                                         console.log(`模拟操作进度：${v + 1}/${num}`)
@@ -395,16 +400,18 @@ function helpByStage(shareCodes) {
                     data = JSON.parse(data);
                     if (data.iRet === 0 || data.sErrMsg === 'success') {
                         console.log(`助力成功：获得${data.GuestPrizeInfo.strPrizeName}`)
-                    } else if (data.iRet === 2232 || data.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
+                    } else if (data.iRet === 2235 || data.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
                         console.log(`助力失败：${data.sErrMsg}`)
                         $.canHelp = false
+                    } else if (data.iRet === 2232 || data.sErrMsg === '分享链接已过期') {
+                        console.log(`助力失败：${data.sErrMsg}`)
+                        $.delcode = true
                     } else if (data.iRet === 9999 || data.sErrMsg === '您还没有登录，请先登录哦~') {
                         console.log(`助力失败：${data.sErrMsg}`)
                         $.canHelp = false
                     } else if (data.iRet === 2229 || data.sErrMsg === '助力失败啦~') {
-                        console.log(`助力失败：您的账号或被助力的账号可能已黑，请联系客服`)
-                        num++
-                        if (num === 5) $.canHelp = false
+                        console.log(`助力失败：您的账号已黑`)
+                        $.canHelp = false
                     } else if (data.iRet === 2190 || data.sErrMsg === '达到助力上限') {
                         console.log(`助力失败：${data.sErrMsg}`)
                         $.delcode = true
@@ -652,12 +659,13 @@ function readShareCode() {
 function shareCodesFormat() {
     return new Promise(async resolve => {
         $.newShareCodes = []
-        const readShareCodeRes = await readShareCode();
-        if (readShareCodeRes && readShareCodeRes.code === 200) {
-            $.newShareCodes = [...new Set([...$.shareCodes, ...$.strMyShareIds, ...(readShareCodeRes.data || [])])];
-        } else {
-            $.newShareCodes = [...new Set([...$.shareCodes, ...$.strMyShareIds])];
-        }
+        // const readShareCodeRes = await readShareCode();
+        // if (readShareCodeRes && readShareCodeRes.code === 200) {
+        //   $.newShareCodes = [...new Set([...$.shareCodes, ...$.strMyShareIds, ...(readShareCodeRes.data || [])])];
+        // } else {
+        //   $.newShareCodes = [...new Set([...$.shareCodes, ...$.strMyShareIds])];
+        // }
+        $.newShareCodes = [...new Set([...$.shareCodes, ...$.strMyShareIds])];
         console.log(`您将要助力的好友${JSON.stringify($.newShareCodes)}`)
         resolve();
     })
