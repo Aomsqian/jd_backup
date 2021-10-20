@@ -1,9 +1,20 @@
 /*
 活动入口： 京东极速版-我的-发财大赢家
+https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_fcdyj.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
-cron "1 5,10 * * *" jd/jd_fcdyj.js
-*/
+============Quantumultx===============
+[task_local]
+#发财大赢家
+1 0 * 6 * https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_fcdyj.js, tag=新潮品牌狂欢, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+================Loon==============
+[Script]
+cron "1 0 * * *" script-path=https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_fcdyj.js tag=翻翻乐
+===============Surge=================
+发财大赢家 = type=cron,cronexp="1 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_fcdyj.js
+============小火箭=========
+发财大赢家 = type=cron,script-path=https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_fcdyj.js, cronexpr="1 0 * * *", timeout=3600, enable=true
+ */
 const $ = new Env('发财大赢家');
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -92,6 +103,16 @@ const JD_API_HOST = `https://api.m.jd.com`;
             }
         }
     }
+        //if($.type == 2){
+        //for (let i = 0 ; i <cookiesArr.length ; i++) {
+          //  cookie = cookiesArr[i];
+            //if (cookie) {
+              //  $.index = i + 1;
+              //  console.log(`\n******查询【京东账号${$.index}】红包情况\n`);
+                //await help($.rid, $.inviter,$.helptype)
+            //}
+        //}
+        //}
 
 })()
 .catch((e) => {
@@ -233,7 +254,7 @@ function open() {
 function getauthorid() {
     return new Promise(async (resolve) => {
         let options = {
-            url: "https://raw.githubusercontent.com/yuannian1112/code/main/dyj1.json",
+            url: "https://cdn.jsdelivr.net/gh/Wenmoux/scripts@wen/code/dyj.json",
             headers: {}
         }
         $.get(options, async (err, resp, data) => {
