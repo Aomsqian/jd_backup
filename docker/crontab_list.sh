@@ -242,3 +242,7 @@
 23 8,19 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 # 预售福利机
 5 0,2 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
+#开卡44
+12 2,18 * * * node /scripts/jd_opencard44.js >> /scripts/logs/jd_opencard44.log 2>&1
+#开卡45
+38 1,20 * * * node /scripts/jd_opencard45.js >> /scripts/logs/jd_opencard45.log 2>&1
