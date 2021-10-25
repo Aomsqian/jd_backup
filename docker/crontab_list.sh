@@ -201,8 +201,6 @@
 10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
 # 内容鉴赏官
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-# 企有此礼
-30 0 * * * node /scripts/jd_qycl.js >> /scripts/logs/jd_qycl.log 2>&1
 #
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 东东世界
@@ -219,8 +217,7 @@
 4 4,17 * * * node /scripts/jd_yijiajiu.js >> /scripts/logs/jd_yijiajiu.log 2>&1
 # 幸运扭蛋
 24 9 * 10-11 * node /scripts/jd_lucky_egg.js >> /scripts/logs/jd_lucky_egg.log 2>&1
-# 
-13 4,15 * * * node /scripts/jd_industrial_task.js >> /scripts/logs/jd_industrial_task.log 2>&1
+
 # 攒金币 赢大礼
 22 0,8 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
 #领京豆额外奖励
