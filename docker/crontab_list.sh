@@ -195,24 +195,18 @@
 0 0 * * * node /scripts/jd_car_exchange.js >> /scripts/logs/jd_car_exchange.log 2>&1
 #女装盲盒
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-
-
-
-# 明星小店
-10 9,18 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
+# 电竞预言家
+23 10,11 * * * node /scripts/jd_lol.js >> /scripts/logs/jd_lol.log 2>&1
+# 集魔力卡召唤大奖
+10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
 # 内容鉴赏官
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-
-#希捷品牌日瓜分百万京豆
-17 2,10 * 9,10 * node /scripts/jd_UnknownTask4.js >> /scripts/logs/jd_UnknownTask4.log 2>&1
-
 # 企有此礼
 30 0 * * * node /scripts/jd_qycl.js >> /scripts/logs/jd_qycl.log 2>&1
 #
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 东东世界
 15 3,16 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
-
 # 魔方
 11 7,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 芥么签到
@@ -223,7 +217,6 @@
 0 0 * * * node /scripts/jd_ddworld_exchange.js >> /scripts/logs/jd_ddworld_exchange.log 2>&1
 # 1+9
 4 4,17 * * * node /scripts/jd_yijiajiu.js >> /scripts/logs/jd_yijiajiu.log 2>&1
-
 # 幸运扭蛋
 24 9 * 10-11 * node /scripts/jd_lucky_egg.js >> /scripts/logs/jd_lucky_egg.log 2>&1
 # 
@@ -242,7 +235,6 @@
 23 8,19 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 # 预售福利机
 5 0,2 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
-
 # 手机狂欢城
 0 0,12,18,21 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 手机狂欢城助力
