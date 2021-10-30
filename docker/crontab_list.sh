@@ -246,3 +246,5 @@
 0 0 * * * node /scripts/jd_angryBean.js >> /scripts/logs/jd_angryBean.log 2>&1
 # 极速版-发财挖宝
 20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
+# 双11红包
+0 0,12 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
