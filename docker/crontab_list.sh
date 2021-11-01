@@ -246,6 +246,8 @@
 # 极速版-发财挖宝
 20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
 # 双11红包
-0 0,12 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
+0 0,12,20,21,22 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
 # 小魔方
 31 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
+# 京东超级盒子
+24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
