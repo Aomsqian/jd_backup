@@ -247,3 +247,5 @@
 31 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 # 京东超级盒子
 24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
+# 双11特务
+10 9,13,16,19,20 2-8 11 * node /scripts/jd_tw.js >> /scripts/logs/jd_tw.log 2>&1
