@@ -237,4 +237,8 @@
 # 京东超级盒子
 24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 双11特务
-10 9,13,16,19,20 2-8 11 * node /scripts/jd_tw.js >> /scripts/logs/jd_tw.log 2>&1
+10 9,13,15,16,19,20 2-8 11 * node /scripts/jd_tewu.js >> /scripts/logs/jd_tewu.log 2>&1
+# 星推官
+22 3,19 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
+# 牛牛福利
+1 9,19 * * * node /scripts/jd_nnfl.js >> /scripts/logs/jd_nnfl.log 2>&1
