@@ -3,17 +3,21 @@
 cron 1 * * * * jd_cfd.js
 更新时间：2021-9-11
 活动入口：京喜APP-我的-京喜财富岛
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛
 1 * * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "1 * * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd.js,tag=京喜财富岛
+
 ===============Surge=================
 京喜财富岛 = type=cron,cronexp="1 * * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd.js
+
 ============小火箭=========
 京喜财富岛 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd.js, cronexpr="1 * * * *", timeout=3600, enable=true
  */
@@ -300,9 +304,17 @@ function GetPropCardCenterInfo() {
                   break;
                 }
               }
-              if (!$.canuse) console.log(`无可用道具卡\n`)
+              for (let key of Object.keys(data.cardInfo.richcard)) {
+                let vo = data.cardInfo.richcard[key]
+                if (vo.dwCardNums > 0) {
+                  $.canuse = true;
+                  await UsePropCard(vo.strCardTypeIndex)
+                  break;
+                }
+              }
+              if (!$.canuse) console.log(`无可用道具卡`)
             } else {
-              console.log(`有在使用中的道具卡，跳过使用\n`)
+              console.log(`有在使用中的道具卡，跳过使用`)
             }
           }
         }
@@ -326,9 +338,9 @@ function UsePropCard(strCardTypeIndex) {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
           if (data.iRet === 0) {
             let cardName = strCardTypeIndex.split("_")[1];
-            console.log(`使用道具卡【${cardName}】成功\n`)
+            console.log(`使用道具卡【${cardName}】成功`)
           } else {
-            console.log(`使用道具卡失败：${JSON.stringify(data)}\n`)
+            console.log(`使用道具卡失败：${JSON.stringify(data)}`)
           }
         }
       } catch (e) {
@@ -616,7 +628,7 @@ async function getTakeAggrPage(type) {
               console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
             } else {
               data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
-              console.log(`领助力奖励`)
+              console.log(`\n领助力奖励`)
               let helpNum = []
               for (let key of Object.keys(data.Data.Employee.EmployeeList)) {
                 let vo = data.Data.Employee.EmployeeList[key]
@@ -1544,7 +1556,7 @@ function readShareCode() {
         resolve(data);
       }
     })
-    await $.wait(10000);
+     await $.wait(30 * 1000);
     resolve()
   })
 }
