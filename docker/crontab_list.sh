@@ -224,8 +224,8 @@
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 # 潮玩儿制躁团
 23 9,12 * * * node /scripts/jd_zzt.js >> /scripts/logs/jd_zzt.log 2>&1
-# 抢京豆
-0 0 * * * node /scripts/jd_angryBean.js >> /scripts/logs/jd_angryBean.log 2>&1
+#锦鲤
+5 0 * * * node /scripts/jd_angryKoi.js >> /scripts/logs/jd_angryKoi.log 2>&1
 # 极速版-发财挖宝
 20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
 # 双11红包
@@ -236,11 +236,4 @@
 24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 双11特务
 10 9,13,15,16,19,20 2-8 11 * node /scripts/jd_tewu.js >> /scripts/logs/jd_tewu.log 2>&1
-# 星推官
-22 3,19 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
-# 牛牛福利
-1 9,19 * * * node /scripts/jd_nnfl.js >> /scripts/logs/jd_nnfl.log 2>&1
-# 热血心跳,狂解压
-10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
-# 双11环游记大富翁
-0 2 1-11 11 * node /scripts/jd_travel_shop.js >> /scripts/logs/jd_travel_shop.log 2>&1
+
