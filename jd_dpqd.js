@@ -3,14 +3,14 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-15 2,14 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js, tag=店铺签到, enabled=true
+0 0 * * * https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js,tag=店铺签到
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
 const $ = new Env('店铺签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -25,26 +25,26 @@ let vender=''
 let num=0
 let shopname=''
 const token = [
-  "2B5C0F65AAB570D1736C8F24D1260D78",
-  "F932E5DE653968BB1D92A2DFFD5318C7",
-  "C4FF5A919CEE68F9669A32950697694C",
-  "39415200CB5E286A4DB604A54C901A13",
-  "0F1BF9A5EC7FCFB93D34C7054C1CC288",
-  "F5E2E3856C6FF1869CCE53153D237112",
-  "7A64973CD1A0873108CB2E4740A86D7D",
-  "621A2C5B99EC5DDAD2C30EFACC5CE2E0",
-  "45DBA1666FC56F3040F2F68396F1CDCE",
-  "91B152F4FE6110D612C16DFD5035B3FB",
-  "098FD50396245FA00EA629B20A533E3E",
-  "DFB0150982F11A1EFB81A5B1399B7BD1",
-  "F12032C7804D496FC82CCCBEDE205CA0",
+  "C875262D1E2F8C834F2DFA527BDF2724",
+  "E68D4CEC40DB85570256F324BCB0F2B5",
+  "4FCBD807A3FF71B0F3E280C967EE82F8",
+  "E8B45AEFAA1A0C6E986AE5A590910BFB",
+  "0B6D1B8BE2E0C6C48FEC6F260709BF6E",
+  "03B4F891150FB4EBC1231233F8A8C912",
+  "48DBE3F4D3A34ADBB3770E09147DB7C1",
+  "4CBAED059DD9265716123BAF56FB8B99",
+  "E18FFBE964D052A01959040A2F59EA91",
+  "2E65477B812C05EA3492A74A9C8A274E",
+  "0D70AE9E4AA45611AD9FF77E65ABB796",
+  "9A85F182077C9C9E973498A837A989D7",
+  "87A7B886511ACD5A183C4221D9A035C2",
+  "C8560F4B0CDFB3C941A051CFBBD2A586",
+  "591B5596E3D385AC086D09751BF0E9B3",
+  "EACFF8C8A3714FBAEB4650877DB43FB3",
+  "99202FEC6B4D32ABC2B0357AC9279B11",
+  "DA5D2FBC54C6C6D8597E10388BAE7449",
   "755A1AA058A02D18CCB4D239E35FCB5B",
-  "4CA02475CEFE1F2C7D704C47636A0F1E",
-  "91B152F4FE6110D612C16DFD5035B3FB",
-  "88C72E9A4F342606C7C98C601CCB3196",
-  "020702C2C96800D57EAB2FA017314A42",
-  "329C618CD7B700B350C8CC8054B8622E",
-  "7BFD202E8D2D071F5E79B6E9D3892020"
+  "EE76EF6121CEA4F92C92E29C7B75AA98"
 ]
 
 if ($.isNode()) {
@@ -86,7 +86,6 @@ if ($.isNode()) {
       }
       await dpqd()
       await showMsg()
-      await $.wait(1500)
     }
   }
   if ($.isNode() && allMessage) {
@@ -105,7 +104,6 @@ async function dpqd(){
   for (var j = 0; j < token.length; j++) {
     num=j+1
     if (token[j]=='') {continue}
-    getUA()
     await getvenderId(token[j])
     if (vender=='') {continue}
     await getvenderName(vender)
@@ -126,8 +124,7 @@ function getvenderId(token) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": 'https://h5.m.jd.com/',
-        "User-Agent": $.UA
-        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -165,8 +162,7 @@ function getvenderName(venderId) {
         "accept-encoding": "gzip, deflate, br",
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
-        "User-Agent": $.UA
-        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -202,8 +198,7 @@ function getActivityInfo(token,venderId) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-        "User-Agent": $.UA
-        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -246,8 +241,7 @@ function signCollectGift(token,venderId,activitytemp) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-        "User-Agent": $.UA
-        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -279,8 +273,7 @@ function taskUrl(token,venderId) {
         "accept-language": "zh-CN,zh;q=0.9",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/`,
-        "User-Agent": $.UA
-        // "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -365,18 +358,6 @@ function jsonParse(str) {
       return [];
     }
   }
-}
-
-function randomString(e) {
-  e = e || 32;
-  let t = "abcdef0123456789", a = t.length, n = "";
-  for (i = 0; i < e; i++)
-    n += t.charAt(Math.floor(Math.random() * a));
-  return n
-}
-
-function getUA() {
-  $.UA = `jdapp;iPhone;10.2.2;13.1.2;${randomString(40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/2308460611;appBuild/167863;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
 }
 
 // prettier-ignore
